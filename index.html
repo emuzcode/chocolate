@@ -99,6 +99,9 @@
 </html>
 
 <script>
+  // グローバルにグラフオブジェクトを保持
+  let pieChart;
+
   function calculate() {
     // 入力値を取得
     const cacaoAmount = Number(document.getElementById("cacaoAmount").value);
@@ -139,10 +142,12 @@
     // 結果を表示
     document.getElementById("result").innerHTML = resultHTML;
 
-
     // Chart.jsを使って円グラフを作成
-    const ctx = document.getElementById('resultPieChart').getContext('2d');
-    new Chart(ctx, {
+    if (pieChart) {
+      pieChart.destroy();
+    }
+    let ctx = document.getElementById('resultPieChart').getContext('2d');
+    pieChart = new Chart(ctx, {
       type: 'pie',
       data: {
         labels: ['カカオ', 'カカオバター', '砂糖', '追加物'],
@@ -175,11 +180,17 @@
             }
           },
           datalabels: {
+            color: '#FFF',
+            font: {
+              size: '14px',
+              weight: 'bold'
+            },
+            textAlign: "center",
             formatter: function(value, context) {
               const amount = context.dataset.data[context.dataIndex] || 0;
               const total = context.dataset.data.reduce((a, b) => parseFloat(a) + parseFloat(b), 0);
               const percentage = ((amount / total) * 100).toFixed(2);
-              return context.chart.data.labels[context.dataIndex] + '\n' + `${percentage}%` + '\n' + value + 'g';
+              return context.chart.data.labels[context.dataIndex] + '\n' + `${percentage}%`;
             }
           }
         }
