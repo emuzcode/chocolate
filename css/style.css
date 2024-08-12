@@ -49,7 +49,7 @@ main {
   flex-direction: column; /* コンテンツを縦並びにする */
   align-items: center; /* 中央に揃える */
   justify-content: center; /* 縦方向でも中央に揃える */
-  height: 36vh; /* セクション全体を画面の高さにする */
+  height: 48vh; /* セクション全体を画面の高さにする */
   text-align: center; /* テキストを中央揃え */
   padding: 24px; /* 内側の余白を追加 */
 }
@@ -119,7 +119,7 @@ main {
 /* テキスト入力フィールドのスタイル */
 .question input[type="number"] {
   width: 100%; /* 入力フィールドの幅を100%に */
-  padding: 8px 12px;
+  padding: 8px;
   box-sizing: border-box; /* paddingを含めた幅にする */
   border: 1px solid #ccc; /* 境界線の色 */
   border-radius: 5px; /* 角を丸める */
@@ -188,6 +188,7 @@ main {
   padding: 10px;
   text-align: center;
   border: 1px solid #ddd;
+  font-size: 14px;
 }
 
 .result table th {
@@ -244,6 +245,49 @@ footer p:last-child {
   footer {
       font-size: 0.8em; /* 小さな画面サイズでフォントを縮小 */
       padding: 15px; /* 小さな画面サイズでパディングを縮小 */
+  }
+}
+
+/* デフォルトのカラム幅 */
+col:nth-child(1) {
+  width: 70%;
+}
+
+col:nth-child(2) {
+  width: 20%;
+}
+
+col:nth-child(3) {
+  width: 10%;
+}
+
+/* 画面幅が768px以下の場合 */
+@media (max-width: 768px) {
+  col:nth-child(1) {
+      width: 50%; /* カラム1の幅を60%に変更 */
+  }
+
+  col:nth-child(2) {
+      width: 30%; /* カラム2の幅を30%に変更 */
+  }
+
+  col:nth-child(3) {
+      width: 20%; /* カラム3の幅を10%に変更 */
+  }
+}
+
+/* 画面幅が480px以下の場合 */
+@media (max-width: 480px) {
+  col:nth-child(1) {
+      width: 50%; /* カラム1の幅を50%に変更 */
+  }
+
+  col:nth-child(2) {
+      width: 30%; /* カラム2の幅を40%に変更 */
+  }
+
+  col:nth-child(3) {
+      width: 20%; /* カラム3の幅を10%に変更 */
   }
 }
 
