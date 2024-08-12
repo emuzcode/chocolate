@@ -9,47 +9,45 @@
     <meta name="robots" content="noarchive">
 
     <title>カカオの方程式</title>
-    <meta name="description" content="カカオと砂糖の比率を簡単に計算。理想のカカオ％を見つけるためのBean to Bar専用ツール。カカオの悩みを即解決！">
+    <meta name="description" content="カカオと砂糖の比率を簡単に計算。理想のカカオ％を見つけるためのBean to Bar専用ツール。カカオの悩みを解決。">
     <link rel="canonical" href="https://emuzcode.github.io/chocolate/">
     <meta property="og:site_name" content="カカオの方程式">
     <meta property="og:title" content="トップページ">
-    <meta property="og:description" content="カカオと砂糖の比率を簡単に計算。理想のカカオ％を見つけるためのBean to Bar専用ツール。カカオの悩みを即解決！">
+    <meta property="og:description" content="カカオと砂糖の比率を簡単に計算。理想のカカオ％を見つけるためのBean to Bar専用ツール。カカオの悩みを解決。">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://emuzcode.github.io/chocolate/">
-    <link rel="apple-touch-icon" sizes="180x180" href="./img/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./img/beanbar-logo.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./img/beanbar-logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./img/beanbar-logo.png">
     <link rel="manifest" href="./img/site.webmanifest">
-    <!-- <link rel="styleshee" href="CSSファイルのURLを記載">
-    <script src="スクリプトファイルのURLを記載"></script> -->
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- <script src="スクリプトファイルのURLを記載"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 </head>
 
 <body>
   <header>
-    <h1>カカオの方程式</h1>
-    <nav>
-      <h2>menu</h2>
-      <ul>
-        <li><a href="#">Why?</a></li>
-        <li><a href="#">Who?</a></li>
-        <li><a href="#">How?</a></li>
-      </ul>
-    </nav>
+    <div><img src="./img/beanbar-logo.png"></div>
   </header>
   <main>
-    <section>
-      <h2>カカオの方程式とは</h2>
-      <p>このサイトは、理想のカカオ％を見つけるためのBean to Bar専用ツールである</p>
-      <p>TO カカオを愛するすべての方へ</p>
+    <section class="mv">
+      <div><img src="./img/beanbar-logo.png"></div>
+      <h2>カカオの方程式</h2>
+      <p>あなたの理想のカカオ比率を見つける、Bean to Bar のための専用ツール</p>
     </section>
-    <section>
-      <h2>質問</h2>
+    <section class="question">
       <table>
+        <colgroup>
+          <col style="width: 70%;">
+          <col style="width: 20%;">
+          <col style="width: 10%;">
+        </colgroup>
         <thead> <!-- テーブルのヘッダー -->
           <tr> <!-- テーブルの行 -->
-            <th>質問</th> <!-- テーブルのヘッダーセル -->
+            <th></th> <!-- テーブルのヘッダーセル -->
             <th>入力</th>
             <th>単位</th>
           </tr>
@@ -66,7 +64,7 @@
             <td>%</td>
           </tr>
           <tr>
-            <td>追加物は全体の何%に設定しますか？</td> <!-- テーブルのデータセル -->
+            <td>追加物は全体の何%に設定しますか？<span style="font-size: 10px;">（ミルクパウダー等）</span></td> <!-- テーブルのデータセル -->
             <td><input type="number" id="otherPercent" placeholder="例: 14" required maxlength="6" size="8" value="14" /></td>
             <td>%</td>
           </tr>
@@ -79,19 +77,16 @@
       </table>
       <button onclick="calculate()">計算する</button>
     </section>
-    <section>
+    <section class="result">
       <h2>結果</h2>
-      <div id="result">※ここに結果が表示されます</div>
-    </section>
-    <section>
-      <h2>円グラフ</h2>
+      <div id="result">※こちらに結果が表示されます</div>
       <canvas id="resultPieChart"></canvas>
     </section>
   </main>
   <footer>
-    <address>
-      chichibu chocolate factoryへのご連絡は、<a href="https://www.instagram.com/chichibu.chocolate.factory/" target="_blank" rel="nofollow noreferrer">Instagram</a>からお願いします。
-    </address>
+    <p>
+      CHICHIBU CHOCOLATE FACTORYへのご連絡は、<a href="https://www.instagram.com/chichibu.chocolate.factory/" target="_blank" rel="nofollow noreferrer">Instagram</a> からお願いいたします。
+    </p>
     <p>&copy; 2024 カカオの方程式.</p>
   </footer>
 </body>
