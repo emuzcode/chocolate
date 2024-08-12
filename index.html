@@ -9,11 +9,11 @@
     <meta name="robots" content="noarchive">
 
     <title>カカオの方程式</title>
-    <meta name="description" content="カカオと砂糖の比率を簡単に計算。理想のカカオ％を見つけるためのBean to Bar専用ツール。カカオの悩みを解決。">
+    <meta name="description" content="カカオと砂糖の比率を簡単に計算。理想のカカオ％を計算するためのBean to Bar専用ツール。カカオの悩みを解決。">
     <link rel="canonical" href="https://emuzcode.github.io/chocolate/">
     <meta property="og:site_name" content="カカオの方程式">
     <meta property="og:title" content="トップページ">
-    <meta property="og:description" content="カカオと砂糖の比率を簡単に計算。理想のカカオ％を見つけるためのBean to Bar専用ツール。カカオの悩みを解決。">
+    <meta property="og:description" content="カカオと砂糖の比率を簡単に計算。理想のカカオ％を計算するためのBean to Bar専用ツール。カカオの悩みを解決。">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://emuzcode.github.io/chocolate/">
     <link rel="apple-touch-icon" sizes="180x180" href="./img/beanbar-logo.png">
@@ -82,6 +82,12 @@
       <div id="result">※こちらに結果が表示されます</div>
       <canvas id="resultPieChart"></canvas>
     </section>
+    <section class="evidence">
+      <details>
+        <summary>計算式</summary>
+        <div id="evidenceResult">※こちらに結果が表示されます</div>
+      </details>
+    </section>
   </main>
   <footer>
     <p>
@@ -104,14 +110,14 @@
     const otherPercent = Number(document.getElementById("otherPercent").value);
     const cacaoButterPercent = Number(document.getElementById("cacaoButterPercent").value);
 
-    //  1 gram
-    const g = cacaoAmount / (cacaoPercent - otherPercent / (100 / cacaoButterPercent));
+    //  1 percent
+    const gramsPerPercent = cacaoAmount / (cacaoPercent - otherPercent / (100 / cacaoButterPercent));
 
     // 計算
-    const resultCacaoAmount = g * (cacaoPercent - otherPercent / (100 / cacaoButterPercent));
-    const resultCacaoButter = g * (otherPercent / (100 / cacaoButterPercent));
-    const resultSugarAmount = g * (100 - (( (cacaoPercent - otherPercent / (100 / cacaoButterPercent)) + (otherPercent / (100 / cacaoButterPercent))) + otherPercent));
-    const resultOtherAmount = g * otherPercent;
+    const resultCacaoAmount = gramsPerPercent * (cacaoPercent - otherPercent / (100 / cacaoButterPercent));
+    const resultCacaoButter = gramsPerPercent * (otherPercent / (100 / cacaoButterPercent));
+    const resultSugarAmount = gramsPerPercent * (100 - (( (cacaoPercent - otherPercent / (100 / cacaoButterPercent)) + (otherPercent / (100 / cacaoButterPercent))) + otherPercent));
+    const resultOtherAmount = gramsPerPercent * otherPercent;
     const resultTotal = resultCacaoAmount + resultCacaoButter + resultSugarAmount + resultOtherAmount;
 
     // 結果をHTMLテーブルとして構築
@@ -136,6 +142,23 @@
 
     // 結果を表示
     document.getElementById("result").innerHTML = resultHTML;
+
+    // 結果をHTMLテーブルとして構築
+    let evidenceResultHTML = `
+      <p>出来上がり全体を100％とした場合、1％が何グラムかを計算</p>
+      <code>${gramsPerPercent.toFixed(2)} = ${cacaoAmount} / (${cacaoPercent} - ${otherPercent} / (100 / ${cacaoButterPercent}))</code>
+      <p>カカオ（g）</p>
+      <code>${resultCacaoAmount.toFixed(2)} = ${gramsPerPercent.toFixed(2)} * (${cacaoPercent} - ${otherPercent} / (100 / ${cacaoButterPercent}))</code>
+      <p>カカオバター（g）</p>
+      <code>${resultCacaoButter.toFixed(2)} = ${gramsPerPercent.toFixed(2)} * (${otherPercent} / (100 / ${cacaoButterPercent}))</code>
+      <p>砂糖（g）</p>
+      <code>${resultSugarAmount.toFixed(2)} = ${gramsPerPercent.toFixed(2)} * (100 - (( (${cacaoPercent} - ${otherPercent} / (100 / ${cacaoButterPercent})) + (${otherPercent} / (100 / ${cacaoButterPercent}))) + ${otherPercent}))</code>
+      <p>その他（g）</p>
+      <code>${resultOtherAmount.toFixed(2)} = ${gramsPerPercent.toFixed(2)} * ${otherPercent}</code>
+    `;
+
+    // 結果を表示
+    document.getElementById("evidenceResult").innerHTML = evidenceResultHTML;
 
     // Chart.jsを使って円グラフを作成
     if (pieChart) {
