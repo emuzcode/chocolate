@@ -121,7 +121,7 @@
           <th>カカオ（g）</th>
           <th>カカオバター（g）</th>
           <th>砂糖（g）</th>
-          <th>追加物（g）</th>
+          <th>その他（g）</th>
           <th>合計（g）</th>
         </tr>
         <tr>
@@ -145,7 +145,7 @@
     pieChart = new Chart(ctx, {
       type: 'pie',
       data: {
-        labels: ['カカオ', 'カカオバター', '砂糖', '追加物'],
+        labels: ['カカオ', 'カカオバター', '砂糖', 'その他'],
         datasets: [{
           data: [
               resultCacaoAmount.toFixed(2),
@@ -153,7 +153,7 @@
               resultSugarAmount.toFixed(2),
               resultOtherAmount.toFixed(2)
           ],
-          backgroundColor: ['#8B4513', '#D2B48C', '#FFD700', '#CD853F'],
+          backgroundColor: ['#7D5A50', '#B4846C', '#E5B299', '#FCDEC0'],
         }]
       },
       plugins: [ChartDataLabels],
